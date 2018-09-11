@@ -1,0 +1,16 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>jquery修改链接--柯乐义</title>
+<script type="text/javascript" src="http://keleyi.com/keleyi/pmedia/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+jquery修改a标签的href链接和文字,先点击下面链接<br />然后点击"改变"按钮，然后点点击一次下面的链接，注意两次打开页面的不同：<br />
+<a href="http://keleyi.com/a/bjac/d863921ed93d03ff.htm" id="home_keleyi_com" target="_blank">原文</a> <input type="button" value="改变" id="gb_keleyi_com" />
+<script type="text/javascript">
+$("#gb_keleyi_com").bind("click",function (){
+$('#home_keleyi_com').attr('href','http://keleyi.com'); 
+$("#home_keleyi_com").text('柯乐义首页');})
+</script>
+</body>

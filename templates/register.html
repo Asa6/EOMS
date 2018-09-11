@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>DevOps.Geng</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/signin.css" rel="stylesheet"/>
+    <link rel="icon" href="/static/fonts/favicon.ico">
+</head>
+
+<body>
+<div class="container">
+    <form class="form-signin" action="/cmdb/register" method="post">
+        <h2 class="form-signin-heading">账号注册</h2>
+        <label for="inputEmail" class="sr-only">邮箱</label>
+        <input type="email" id="inputEmail" name="user" class="form-control" placeholder="邮箱" required autofocus>
+
+        <label for="inputPassword" class="sr-only">请输入密码</label>
+        <input type="password" id="inputPassword" name="pwd" style="margin-bottom: 0px;" class="form-control"
+               placeholder="请输入密码" required>
+
+        <label for="confirm-password" class="sr-only">请再次输入密码</label>
+        <input type="password" id="confirm-password" name="confirm_pwd" class="form-control" placeholder="请再次输入密码"
+               required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+
+        <div class="checkbox">
+            <span style="color: red">{{ error_msg }}</span>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var Dict = {{ Dict|safe }};
+
+    if (Dict['msg_code'] == '001') {
+        setTimeout("location.href='/cmdb/login';", 1500);
+    }
+</script>
+
+<script src="/static/jquery/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

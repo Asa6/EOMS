@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevOps.Geng</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+
+    <link rel="icon" href="/static/fonts/favicon.ico">
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/cmdb/admin">HY.Geng</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">仪表盘</a></li>
+                <li><a href="#">设置</a></li>
+                <li><a href="#">概况</a></li>
+                <li><a href="/cmdb/login">退出</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="搜索...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/cmdb/admin">总览</a></li>
+                <li class="active"><a href="/cmdb/hosts">实例</a></li>
+                {#            <li><a href="#">Analytics</a></li>#}
+                {#            <li><a href="#">Export</a></li>#}
+            </ul>
+            <ul class="nav nav-sidebar">
+                {#            <li><a href="">Nav item</a></li>#}
+                {#            <li><a href="">Nav item again</a></li>#}
+                {#            <li><a href="">One more nav</a></li>#}
+                {#            <li><a href="">Another nav item</a></li>#}
+                {#            <li><a href="">More navigation</a></li>#}
+            </ul>
+            <ul class="nav nav-sidebar">
+                {#            <li><a href="">Nav item again</a></li>#}
+                {#            <li><a href="">One more nav</a></li>#}
+                {#            <li><a href="">Another nav item</a></li>#}
+            </ul>
+        </div>
+
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+            {#            <div style="float: right; margin-top: 20px;margin-left: 20px;">#}
+            {#                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"#}
+            {#                        data-whatever="@mdo">删除主机#}
+            {#                </button>#}
+            {##}
+            {#            </div>#}
+
+            <div style="float: right; margin-top: 20px;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="@mdo">
+                    <span class="glyphicon glyphicon-plus"></span> 创建实例
+
+                </button>
+
+            </div>
+
+
+            <h2 class="sub-header">实例列表</h2>
+            <div style="clear:both;"></div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div style="width: 550px;" class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">主机信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div style="float:left; width: 46%" class="form-group">
+                                    <label for="recipient-name" class="control-label">主机名:</label>
+                                    <input id="hostname" type="text" class="form-control" id="recipient-name">
+                                </div>
+
+                                <div style="float:right; width: 46%" class="form-group">
+                                    <label for="recipient-name" class="control-label">IP地址:</label>
+                                    <input id="IP" type="text" class="form-control" id="recipient-name">
+                                </div>
+
+                                <div style="float:left; width: 46%" class="form-group">
+                                    <label for="recipient-name" class="control-label">SSH端口:</label>
+                                    <input id="port" type="text" class="form-control" id="recipient-name">
+                                </div>
+
+                                {#                                <div style="float:right; width: 46%" class="form-group">#}
+                                {#                                    <label for="recipient-name" class="control-label">用户名:</label>#}
+                                {#                                    <input id = "username" type="text" class="form-control" id="recipient-name">#}
+                                {#                                </div>#}
+                                {##}
+                                {#                                <div style="float:left; width: 46%" class="form-group">#}
+                                {#                                    <label for="recipient-name" class="control-label">密码:</label>#}
+                                {#                                    <input id = "pwd" type="text" class="form-control" id="recipient-name">#}
+                                {#                                </div>#}
+
+
+                                <div style="float: right; width: 46%;">
+
+                                    <label for="recipient-name" class="control-label">业务线:</label>
+                                    {#                                    <select id="business_select" class="form-control selectpicker">#}
+                                    <select id="business_select" class="form-control">
+                                        {#                                     <select onchange="showMsg(this)" id = "business_select" class="form-control selectpicker">#}
+                                        {#                                        <option hidden>请选择业务线</option>#}
+                                        {% for business in businesses %}
+                                            <option value="{{ business.id }}">{{ business.name }}</option>
+                                        {% endfor %}
+                                    </select>
+
+
+                                </div>
+
+
+                                <div style="clear:both;"></div>
+
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label">备注:</label>
+                                    <textarea style="height: 110px" class="form-control" id="message-text"></textarea>
+                                </div>
+
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button id="host_submit" type="button" class="btn btn-primary">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="table-responsive">
+                {#                <table class="table table-striped">#}
+                <table class="table table-bordered table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th width="35px" style="text-align:center;">
+
+{#                                <label><input type="checkbox" value=""></label>#}
+                            <input type="checkbox" value="">
+
+                        </th>
+                        <th>序号</th>
+                        <th>主机名</th>
+                        <th>IP地址</th>
+                        <th>端口</th>
+                        <th>业务线</th>
+                        <th>删除</th>
+                        {#                        <th>更新</th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for host in hosts %}
+                        <tr>
+                        <td style="text-align:center;">
+
+                               <input type="checkbox" value={{ host.id }}>
+
+                        </td>
+                        <td>{{ forloop.counter }}</td>
+                        {#                            <td name = "td_id" id={{ host.id }} class="hide">{{ host.id }}</td>#}
+                        <td>{{ host.hostname }}</td>
+                        <td>{{ host.ip }}</td>
+                        <td>{{ host.port }}</td>
+                        <td>{{ host.business__name }}</td>
+                        <td>
+                            <a data-id="{{ host.id }}" data-toggle="modal"
+                               data-target="#del_host_jump"
+                               data-whatever="@mdo" id="del" title="删除主机">
+                                <span style="font-size: 17px" class="glyphicon glyphicon-trash" ;></span>
+                            </a>
+
+                            <div class="modal fade modleDailog" id="del_host_jump" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel">
+                                <div style="width: 500px;" class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="exampleModalLabel">删除主机</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div style="height: 80px">
+                                                    <div style="float: left; margin-top: 22.5px;">
+                                        <span class="glyphicon glyphicon-question-sign"
+                                              style="font-size:35px; color: orange;">
+                                        </span>
+                                                    </div>
+                                                    <div style="float: right; margin-top: 30px;">
+                                                        <span style="font-size: 17px;">您所选的 1 个主机  将执行删除操作，您是否确认操作？</span>
+                                                    </div>
+                                                </div>
+
+                                                <div style="clear:both;"></div>
+
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+
+                                            <input type="text" id="del_host_id" class="hide"/>
+
+                                            <button id="deleteOkBtn" type="button" class="btn btn-primary">确定
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                    {% endfor %}
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/static/jquery/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<script>
+    function showMsg() {
+        console.log($("#business_select").val());
+    }
+</script>
+
+<script>
+
+    var modal = $("#del_host_jump");
+    modal.on("shown.bs.modal", function (event) {
+        // 这里的btn就是触发元素，即你点击的删除按钮
+        var btn = $(event.relatedTarget),
+            _id = btn.data("id");
+
+        $("#del_host_id").val(_id);
+    });
+
+    $("#deleteOkBtn").click(function () {
+        var _id = $("#del_host_id").val();
+        {#console.log(_id);#}
+
+        $.ajax({
+            url: "/cmdb/hosts",
+            type: "POST",
+            data: {
+                "_type": "del_host",
+                "_id": _id
+            },
+            success: function (data) {
+                {#alert(data);#}
+                var obj = JSON.parse(data);
+
+                if (obj.type === "del_host") {
+                    if (obj.status) {
+                        location.reload();
+                    } else {
+                        alert(obj.error);
+                    }
+                }
+            }
+        })
+    })
+
+</script>
+
+<script>
+    $("#host_submit").click(function () {
+        $.ajax({
+            url: "/cmdb/hosts",
+            type: "POST",
+            data: {
+                "_type": "add_host",
+                "hostname": $("#hostname").val(),
+                "ip": $("#IP").val(),
+                "port": $("#port").val(),
+                "business": $("#business_select").val()
+            },
+            success: function (data) {
+                {#alert(data);#}
+                var obj = JSON.parse(data);
+
+                if (obj.type === "add_host") {
+                    if (obj.status) {
+                        location.reload();
+                    } else {
+                        alert(obj.error);
+                    }
+                }
+            }
+        })
+    });
+</script>
+
+
+</body>
+</html>
