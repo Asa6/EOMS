@@ -3,8 +3,8 @@
 
 
 
-\# 生成表<br />
 <pre>
+生成表
 python manage.py makemigrations
 python manage.py migrate
 
