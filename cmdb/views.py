@@ -59,8 +59,9 @@ def login(request):
         print(ret)
 
         if ret["status"]:
-            request.session['username'] = user
-            request.session['is_login'] = True
+                request.session['username'] = user
+                request.session['is_login'] = True
+
         #     # 设置cookie， 关闭游览器失效
         #     response.set_cookie('email-cookies', user, max_age=86400)
 
@@ -100,7 +101,26 @@ def register(request):
 
 @auth
 def admin(request):  # request 包含用户提交的所有信息
-    return render(request, 'admin.html')
+    ret = {"status": True, "error": None, "data": None, "type": None}
+
+    if request.method == "GET":
+        return render(request, 'admin.html')
+    elif request.method == "POST":
+        _type = request.POST.get("_type")
+
+        if _type == "del_session":
+            ret["type"] = "del_session"
+
+            try:
+                # 用户退出登录
+                request.session.clear()
+            except Exception as e:
+                ret["status"] = False
+                ret["error"] = "请求错误：" + "%s" % e
+
+
+        response = HttpResponse(json.dumps(ret))
+        return response
 
 @auth
 def hosts(request):

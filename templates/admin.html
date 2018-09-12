@@ -37,7 +37,7 @@
                 <li><a href="#">仪表盘</a></li>
                 <li><a href="#">设置</a></li>
                 <li><a href="#">概况</a></li>
-                <li><a href="/cmdb/login">退出</a></li>
+                <li><a id="del_session" href="javascript:;">退出</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="搜索...">
@@ -110,9 +110,34 @@
 
 
 
-
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
+
+
+<script>
+    $("#del_session").click(function () {
+        $.ajax({
+            url: "/cmdb/admin",
+            type: "POST",
+            data: {
+                "_type": "del_session"
+            },
+            success: function (data) {
+                {#alert(data);#}
+                var obj = JSON.parse(data);
+
+                if (obj.type === "del_session") {
+                    if (obj.status) {
+                        location.reload();
+                    } else {
+                        alert(obj.error);
+                    }
+                }
+            }
+        })
+    })
+</script>
+
 
 </body>
 </html>
