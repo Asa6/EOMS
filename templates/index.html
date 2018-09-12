@@ -81,7 +81,9 @@
                             "pwd": $("#inputPassword").val()
                         },
                         success: function (data) {
+
                             var obj = JSON.parse(data);
+
 
                             if (obj.status) {
                                 console.log("登录成功");
