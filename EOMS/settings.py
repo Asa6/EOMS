@@ -172,6 +172,8 @@ WSGI_APPLICATION = 'EOMS.wsgi.application'
 #     }
 # }
 
+
+# mysql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -181,6 +183,23 @@ DATABASES = {
         'HOST': '47.95.0.177',
         'PORT': '3306',
     }
+}
+
+
+# Session redis
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+# SESSION_SAVE_EVERY_REQUEST = True
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://47.95.0.177:6379',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "PASSWORD": "yoursecret",
+        },
+    },
 }
 
 
@@ -225,6 +244,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
-
 
