@@ -10,24 +10,25 @@ import json
 
 from cmdb import models  # 数据库
 
+
+# 用户认证装饰器
 def auth(func):
     def inner(request, *args, **kwargs):
-        val = request.COOKIES.get("email-cookies")
-        if not val:
+        # val = request.session['is_login']
+        if not request.session.get('is_login', None):
             return redirect('/cmdb/login')
         return func(request, *args, **kwargs)
     return inner
 
 
-
-def login(request):  # request 包含用户提交的所有信息
+# request 包含用户提交的所有信息
+def login(request):
     error_msg = ""
     ret = {"status": True, "error": None, "data": None}
     response = ""
 
     if request.method == "GET":
-        val = request.COOKIES.get("email-cookies")
-        if val:
+        if request.session.get('is_login', None):
             return redirect("/cmdb/admin")
 
         return render(request, 'index.html')
@@ -57,13 +58,15 @@ def login(request):  # request 包含用户提交的所有信息
 
         print(ret)
 
-        response = HttpResponse(json.dumps(ret))
-
         if ret["status"]:
-            # 设置cookie， 关闭游览器失效
-            response.set_cookie('email-cookies', user, max_age=86400)
+            request.session['username'] = user
+            request.session['is_login'] = True
+        #     # 设置cookie， 关闭游览器失效
+        #     response.set_cookie('email-cookies', user, max_age=86400)
 
-        return response
+
+
+        return HttpResponse(json.dumps(ret))
         # return HttpResponse(json.dumps(ret))
 
 
