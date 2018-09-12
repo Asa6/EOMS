@@ -10,12 +10,26 @@ import json
 
 from cmdb import models  # 数据库
 
+def auth(func):
+    def inner(request, *args, **kwargs):
+        val = request.COOKIES.get("email-cookies")
+        if not val:
+            return redirect('/cmdb/login')
+        return func(request, *args, **kwargs)
+    return inner
+
+
 
 def login(request):  # request 包含用户提交的所有信息
     error_msg = ""
     ret = {"status": True, "error": None, "data": None}
+    response = ""
 
     if request.method == "GET":
+        val = request.COOKIES.get("email-cookies")
+        if val:
+            return redirect("/cmdb/admin")
+
         return render(request, 'index.html')
 
     elif request.method == "POST":  # request.method 获取请求方式
@@ -34,6 +48,7 @@ def login(request):  # request 包含用户提交的所有信息
                 ret["error"] = "用户名或密码错误"
 
                 print("邮箱未注册")
+
             # else:
             #     return redirect('/EOMS/admin')
         except Exception as e:
@@ -42,7 +57,14 @@ def login(request):  # request 包含用户提交的所有信息
 
         print(ret)
 
-        return HttpResponse(json.dumps(ret))
+        response = HttpResponse(json.dumps(ret))
+
+        if ret["status"]:
+            # 设置cookie， 关闭游览器失效
+            response.set_cookie('email-cookies', user, max_age=86400)
+
+        return response
+        # return HttpResponse(json.dumps(ret))
 
 
 def register(request):
@@ -73,17 +95,11 @@ def register(request):
 
     return render(request, 'register.html', {'error_msg': error_msg})
 
-
+@auth
 def admin(request):  # request 包含用户提交的所有信息
-    # if request.method == "GET":
-    #     hosts = models.Hosts.objects.all().values("hostname", "ip", "port", "business__name")
-    #     #print(host)
-    #
     return render(request, 'admin.html')
 
-    # return redirect('/EOMS/admin')
-
-
+@auth
 def hosts(request):
     # hosts = ""
     ret = {"status": True, "error": None, "data": None, "type": None}
@@ -92,7 +108,10 @@ def hosts(request):
         hosts_info = models.Hosts.objects.all().values("id", "hostname", "ip", "port", "business__name")
         businesses = models.Business.objects.all().values("id", "name")
 
-        return render(request, 'hosts.html', {'hosts': hosts_info, "businesses": businesses})
+        response = render(request, 'hosts.html', {'hosts': hosts_info, "businesses": businesses})
+        response['X-Application-Name'] = "EOMS"  # 自定义响应头
+        return response
+
     elif request.method == "POST":
         _type = request.POST.get("_type")
 
@@ -134,4 +153,5 @@ def hosts(request):
                 ret["status"] = False
                 ret["error"] = "请求错误：" + "%s" % e
 
-        return HttpResponse(json.dumps(ret))  # 序列化并向前端返回
+        response = HttpResponse(json.dumps(ret))   # 序列化并向前端返回
+        return response
