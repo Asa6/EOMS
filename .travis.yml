@@ -8,7 +8,7 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 
 after_success:
-  - ssh root@47.95.0.177 /data/etc/EOMS_update.sh
+  - ssh root@47.95.0.177 "/data/etc/EOMS_update.sh"
 
 addons:
   ssh_known_hosts: 47.95.0.177
