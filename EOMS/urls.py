@@ -21,6 +21,8 @@ from django.conf.urls import url
 
 from cmdb import views
 
+
+
 urlpatterns = [
     path('cmdb/', include("cmdb.urls")),
     url(r'^$', views.login),
@@ -33,3 +35,4 @@ urlpatterns = [
 #     path('register/', register),
 #     url(r'^$', login),
 # ]
+
