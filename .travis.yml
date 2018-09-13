@@ -13,7 +13,7 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 
 addons:
-  ssh_known_hosts: $host
+  ssh_known_hosts: true
 
 after_success:
   - ssh root@$host "sh /data/etc/EOMS_update.sh"
