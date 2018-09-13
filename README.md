@@ -1,3 +1,6 @@
+[![](https://travis-ci.org/Alamofire/Alamofire.svg?branch=master)](https://travis-ci.org/Asa6/EMOS)
+
+
 # cmdb
 \# 运行环境： 
         
