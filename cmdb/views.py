@@ -178,3 +178,6 @@ def hosts(request):
 
         response = HttpResponse(json.dumps(ret))   # 序列化并向前端返回
         return response
+
+def page_not_found(request):
+    return render(request, '404.html')
