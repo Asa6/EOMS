@@ -21,6 +21,7 @@ from cmdb.views import login
 from cmdb.views import admin
 from cmdb.views import register
 from cmdb.views import hosts
+from cmdb.views import page_not_found
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -29,3 +30,5 @@ urlpatterns = [
     path('register', register),
     path('hosts', hosts),
 ]
+
+handler404 = page_not_found
