@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <title>EOMS</title>
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
@@ -18,73 +18,19 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/cmdb/admin">EOMS</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">仪表盘</a></li>
-                <li><a href="#">设置</a></li>
-                <li><a href="#">概况</a></li>
-                <li><a id="del_session" href="javascript:;">退出</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="搜索...">
-            </form>
-        </div>
-    </div>
-</nav>
+{% include 'top.html' %}
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="/cmdb/admin">总览</a></li>
-                <li class="active"><a href="/cmdb/hosts">实例</a></li>
-                {#            <li><a href="#">Analytics</a></li>#}
-                {#            <li><a href="#">Export</a></li>#}
-            </ul>
-            <ul class="nav nav-sidebar">
-                {#            <li><a href="">Nav item</a></li>#}
-                {#            <li><a href="">Nav item again</a></li>#}
-                {#            <li><a href="">One more nav</a></li>#}
-                {#            <li><a href="">Another nav item</a></li>#}
-                {#            <li><a href="">More navigation</a></li>#}
-            </ul>
-            <ul class="nav nav-sidebar">
-                {#            <li><a href="">Nav item again</a></li>#}
-                {#            <li><a href="">One more nav</a></li>#}
-                {#            <li><a href="">Another nav item</a></li>#}
-            </ul>
-        </div>
-
+        {% include 'left.html' with activecss2='active' %}
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-
-            {#            <div style="float: right; margin-top: 20px;margin-left: 20px;">#}
-            {#                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"#}
-            {#                        data-whatever="@mdo">删除主机#}
-            {#                </button>#}
-            {##}
-            {#            </div>#}
 
             <div style="float: right; margin-top: 20px;">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
                         data-whatever="@mdo">
                     <span class="glyphicon glyphicon-plus"></span> 创建实例
-
                 </button>
-
             </div>
 
 
@@ -116,30 +62,13 @@
                                     <input id="port" type="text" class="form-control" id="recipient-name">
                                 </div>
 
-                                {#                                <div style="float:right; width: 46%" class="form-group">#}
-                                {#                                    <label for="recipient-name" class="control-label">用户名:</label>#}
-                                {#                                    <input id = "username" type="text" class="form-control" id="recipient-name">#}
-                                {#                                </div>#}
-                                {##}
-                                {#                                <div style="float:left; width: 46%" class="form-group">#}
-                                {#                                    <label for="recipient-name" class="control-label">密码:</label>#}
-                                {#                                    <input id = "pwd" type="text" class="form-control" id="recipient-name">#}
-                                {#                                </div>#}
-
-
                                 <div style="float: right; width: 46%;">
-
                                     <label for="recipient-name" class="control-label">业务线:</label>
-                                    {#                                    <select id="business_select" class="form-control selectpicker">#}
                                     <select id="business_select" class="form-control">
-                                        {#                                     <select onchange="showMsg(this)" id = "business_select" class="form-control selectpicker">#}
-                                        {#                                        <option hidden>请选择业务线</option>#}
                                         {% for business in businesses %}
                                             <option value="{{ business.id }}">{{ business.name }}</option>
                                         {% endfor %}
                                     </select>
-
-
                                 </div>
 
 
@@ -149,10 +78,9 @@
                                     <label for="message-text" class="control-label">备注:</label>
                                     <textarea style="height: 110px" class="form-control" id="message-text"></textarea>
                                 </div>
-
-
                             </form>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button id="host_submit" type="button" class="btn btn-primary">添加</button>
