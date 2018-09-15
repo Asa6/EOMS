@@ -25,7 +25,7 @@ from cmdb import views
 
 urlpatterns = [
     path('cmdb/', include("cmdb.urls")),
-    url(r'^$', views.login),
+    url(r'^$', views.Login.as_view()),
 ]
 
 # urlpatterns = [
