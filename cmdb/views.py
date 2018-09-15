@@ -8,6 +8,7 @@ from django.shortcuts import render  # 替代open文件读取
 from django.shortcuts import redirect  # 跳转
 from django.utils.decorators import method_decorator
 from django.views.generic import View
+from django.utils.safestring import mark_safe
 
 import json
 from cmdb import models  # 数据库
@@ -18,12 +19,24 @@ from cmdb import models  # 数据库
 # 用户认证装饰器
 def auth(func):
     def inner(request, *args, **kwargs):
-        # val = request.session['is_login']
         if not request.session.get('is_login', None):
             return redirect('/cmdb/login')
         return func(request, *args, **kwargs)
     return inner
 
+
+class Page:
+    def __init__(self, current_page, data_count, page_count=10, pager_num=5):
+        self.current_page = current_page
+        self.data_count = data_count
+        self.page_count = page_count
+        self.pager_num = pager_num
+
+    def start(self):
+        return (self.current_page - 1) * self.page_count
+
+    def end(self):
+        return self.current_page * self.page_count
 
 class Login(View):
     def __init__(self):
@@ -52,9 +65,6 @@ class Login(View):
                 self.ret["error"] = "用户名或密码错误"
 
                 print("邮箱未注册")
-
-            # else:
-            #     return redirect('/EOMS/admin')
         except Exception as e:
             self.ret["status"] = False
             self.ret["error"] = "请求错误：" + "%s" % e
@@ -133,10 +143,77 @@ class Hosts(View):
         self.ret = {"status": True, "error": None, "data": None, "type": None}
 
     def get(self, request):
+        # 每页显示的数量
+        page_count = 10
+
+        # 页码个数
+        pager_num = 5
+
+        current_page = request.GET.get('page_number', 1)
+        current_page = int(current_page)
+
+        strat = (current_page - 1) * page_count
+        end = current_page * page_count
+
         hosts_info = models.Hosts.objects.all().values("id", "hostname", "ip", "port", "business__name")
         businesses = models.Business.objects.all().values("id", "name")
 
-        response = render(request, 'hosts.html', {'hosts': hosts_info, "businesses": businesses})
+        hosts_info = hosts_info[strat:end]
+        businesses = businesses[strat:end]
+
+        all_count = len(models.Hosts.objects.all())
+        total_count, mod = divmod(all_count, page_count)
+
+        if mod:
+            total_count += 1
+
+        page_list = []
+
+
+        if total_count < pager_num:
+            start_index = 1
+            end_index = total_count + 1
+        else:
+            if current_page <= (pager_num + 1)/2:
+                start_index = 1
+                end_index = pager_num + 1
+            else:
+                start_index = current_page - (pager_num - 1)/2
+                end_index = current_page + (pager_num + 1)/2
+                if (current_page + (pager_num - 1)/2) > total_count:
+                    end_index = total_count + 1
+                    start_index = total_count - pager_num + 1
+
+
+        if current_page <= 1:
+            last_page = '<li class="disabled"><a href="javascript:void(0)">&laquo;</a></li>'
+            page_list.append(last_page)
+        else:
+            last_page = '<li><a href="/cmdb/hosts?page_number=%s">&laquo;</a></li>' % (current_page - 1)
+            page_list.append(last_page)
+
+        for i in range(int(start_index), int(end_index)):
+            if i == current_page:
+                # temp = '<li class="active"><a href="/cmdb/hosts?page_number=%s">%s</a></li>' % (i, i)
+                temp = '<li class="active"><a href="javascript:void(0)">%s</a></li>' % (i)
+            else:
+                temp = '<li><a href="/cmdb/hosts?page_number=%s">%s</a></li>' % (i, i)
+
+            page_list.append(temp)
+
+        # print(current_page, total_count)
+
+        if current_page >= total_count:
+            next_page = '<li class="disabled"><a href="javascript:void(0)">&raquo;</a></li>'
+            page_list.append(next_page)
+        else:
+            next_page = '<li><a href="/cmdb/hosts?page_number=%s">&raquo;</a></li>' % (current_page + 1)
+            page_list.append(next_page)
+
+        page_str = "".join(page_list)
+        page_str = mark_safe(page_str)
+
+        response = render(request, 'hosts.html', {'hosts': hosts_info, "businesses": businesses, 'page_str': page_str})
         response['X-Application-Name'] = "EOMS"  # 自定义响应头
         return response
 
