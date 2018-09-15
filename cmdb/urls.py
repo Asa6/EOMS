@@ -17,18 +17,18 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
-from cmdb.views import login
-from cmdb.views import admin
-from cmdb.views import register
-from cmdb.views import hosts
-from cmdb.views import page_not_found
+from cmdb.views import Login
+from cmdb.views import Admin
+from cmdb.views import Register
+from cmdb.views import Hosts
+from cmdb.views import Page_not_found
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('login', login),
-    path('admin', admin),
-    path('register', register),
-    path('hosts', hosts),
+    path('login', Login.as_view()),
+    path('admin', Admin.as_view()),
+    path('register', Register.as_view()),
+    path('hosts', Hosts.as_view()),
 ]
 
-handler404 = page_not_found
+handler404 = Page_not_found.as_view()

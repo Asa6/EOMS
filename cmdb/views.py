@@ -6,9 +6,13 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.shortcuts import render  # 替代open文件读取
 from django.shortcuts import redirect  # 跳转
-import json
+from django.utils.decorators import method_decorator
+from django.views.generic import View
 
+import json
 from cmdb import models  # 数据库
+
+
 
 
 # 用户认证装饰器
@@ -21,19 +25,18 @@ def auth(func):
     return inner
 
 
-# request 包含用户提交的所有信息
-def login(request):
-    error_msg = ""
-    ret = {"status": True, "error": None, "data": None}
-    response = ""
+class Login(View):
+    def __init__(self):
+        self.ret = {"status": True, "error": None, "data": None}
 
-    if request.method == "GET":
+    # request 包含用户提交的所有信息
+    def get(self, request):
         if request.session.get('is_login', None):
             return redirect("/cmdb/admin")
 
         return render(request, 'index.html')
 
-    elif request.method == "POST":  # request.method 获取请求方式
+    def post(self, request):
         try:
             user = request.POST.get('user', None)
             pwd = request.POST.get('pwd', None)
@@ -45,37 +48,37 @@ def login(request):
             print(result.query)
 
             if len(result) == 0:
-                ret["status"] = False
-                ret["error"] = "用户名或密码错误"
+                self.ret["status"] = False
+                self.ret["error"] = "用户名或密码错误"
 
                 print("邮箱未注册")
 
             # else:
             #     return redirect('/EOMS/admin')
         except Exception as e:
-            ret["status"] = False
-            ret["error"] = "请求错误：" + "%s" % e
+            self.ret["status"] = False
+            self.ret["error"] = "请求错误：" + "%s" % e
 
-        print(ret)
+        print(self.ret)
 
-        if ret["status"]:
+        if self.ret["status"]:
                 request.session['username'] = user
                 request.session['is_login'] = True
 
         #     # 设置cookie， 关闭游览器失效
         #     response.set_cookie('email-cookies', user, max_age=86400)
+        return HttpResponse(json.dumps(self.ret))
 
 
+class Register(View):
+    def __init__(self):
+        self.error_msg = ""
+        self.msg_code = ""
 
-        return HttpResponse(json.dumps(ret))
-        # return HttpResponse(json.dumps(ret))
+    def get(self, request):
+        return render(request, 'register.html')
 
-
-def register(request):
-    error_msg = ""
-    msg_code = ""
-
-    if request.method == "POST":  # request.method 获取请求方式
+    def post(self, request):
         user = request.POST.get('user', None)
         pwd = request.POST.get('pwd', None)
         confirm_pwd = request.POST.get('confirm_pwd', None)
@@ -97,37 +100,39 @@ def register(request):
         except Exception as e:
             print(e)
 
-    return render(request, 'register.html', {'error_msg': error_msg})
+        return render(request, 'register.html', {'error_msg': error_msg})
 
-@auth
-def admin(request):  # request 包含用户提交的所有信息
-    ret = {"status": True, "error": None, "data": None, "type": None}
 
-    if request.method == "GET":
+@method_decorator(auth, name="dispatch")
+class Admin(View):
+    def __init__(self):
+        self.ret = {"status": True, "error": None, "data": None, "type": None}
+
+    def get(self, request):
         return render(request, 'admin.html')
-    elif request.method == "POST":
+
+    def post(self, request):
         _type = request.POST.get("_type")
 
         if _type == "del_session":
-            ret["type"] = "del_session"
+            self.ret["type"] = "del_session"
 
             try:
                 # 用户退出登录
                 request.session.clear()
             except Exception as e:
-                ret["status"] = False
-                ret["error"] = "请求错误：" + "%s" % e
+                self.ret["status"] = False
+                self.ret["error"] = "请求错误：" + "%s" % e
 
-
-        response = HttpResponse(json.dumps(ret))
+        response = HttpResponse(json.dumps(self.ret))
         return response
 
-@auth
-def hosts(request):
-    # hosts = ""
-    ret = {"status": True, "error": None, "data": None, "type": None}
+@method_decorator(auth, name="dispatch")
+class Hosts(View):
+    def __init__(self):
+        self.ret = {"status": True, "error": None, "data": None, "type": None}
 
-    if request.method == "GET":
+    def get(self, request):
         hosts_info = models.Hosts.objects.all().values("id", "hostname", "ip", "port", "business__name")
         businesses = models.Business.objects.all().values("id", "name")
 
@@ -135,11 +140,11 @@ def hosts(request):
         response['X-Application-Name'] = "EOMS"  # 自定义响应头
         return response
 
-    elif request.method == "POST":
+    def post(self, request):
         _type = request.POST.get("_type")
 
         if _type == "add_host":
-            ret["type"] = "add_host"
+            self.ret["type"] = "add_host"
             try:
                 hostname = request.POST.get("hostname")
                 ip = request.POST.get("ip")
@@ -149,35 +154,37 @@ def hosts(request):
                 print(hostname, ip, port, business_id)
 
                 if len(hostname) == 0 and len(ip) == 0 or len(port) == 0 or len(business_id) == 0:
-                    ret["status"] = False
-                    ret["error"] = "字段不能为空"
+                    self.ret["status"] = False
+                    self.ret["error"] = "字段不能为空"
                 else:
                     models.Hosts.objects.create(hostname=hostname, ip=ip, port=port, business_id=business_id)
             except Exception as e:
-                ret["status"] = False
-                ret["error"] = "请求错误：" + "%s" % e
+                self.ret["status"] = False
+                self.ret["error"] = "请求错误：" + "%s" % e
 
-            print(ret)
+            print(self.ret)
 
         elif _type == "del_host":
             print("删除开始-->")
-            ret["type"] = "del_host"
+            self.ret["type"] = "del_host"
             try:
                 _id = request.POST.get("_id")
                 print(_id)
 
                 if len(_id) == 0:
-                    ret["status"] = False
-                    ret["error"] = "字段不能为空"
+                    self.ret["status"] = False
+                    self.ret["error"] = "字段不能为空"
                 else:
                     models.Hosts.objects.filter(id=_id).delete()
-                    #print(_id)
+                    # print(_id)
             except Exception as e:
-                ret["status"] = False
-                ret["error"] = "请求错误：" + "%s" % e
+                self.ret["status"] = False
+                self.ret["error"] = "请求错误：" + "%s" % e
 
-        response = HttpResponse(json.dumps(ret))   # 序列化并向前端返回
+        response = HttpResponse(json.dumps(self.ret))  # 序列化并向前端返回
         return response
 
-def page_not_found(request):
-    return render(request, '404.html')
+
+class Page_not_found(View):
+    def get(self, request):
+        return render(request, '404.html')
