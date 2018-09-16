@@ -130,8 +130,14 @@ class Hosts(View):
         self.ret = {"status": True, "error": None, "data": None, "type": None}
 
     def get(self, request):
+
+        # page_count = request.COOKIES.get('per_page_count', 20)
+        # page_count = int(page_count)
+
         # 实例化对象
-        page = pagination.Paging(int(request.GET.get('page_number', 1)), len(models.Hosts.objects.all()))
+
+
+        page = pagination.Paging(int(request.GET.get('page_number', 1)), len(models.Hosts.objects.all()), page_count = int(request.COOKIES.get('per_page_count', 20)))
 
         # 获取主机信息
         hosts_info = models.Hosts.objects.all()[page.start:page.end].values("id", "hostname", "ip", "port", "business__name")

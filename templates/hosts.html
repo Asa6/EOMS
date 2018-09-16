@@ -34,7 +34,7 @@
             </div>
 
             <h2 class="sub-header">实例列表</h2>
-{#                        <div style="clear:both;"></div>#}
+            {#                        <div style="clear:both;"></div>#}
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                 <div style="width: 550px;" class="modal-dialog" role="document">
@@ -71,7 +71,7 @@
                                 </div>
 
 
-                                                                <div style="clear:both;"></div>
+                                <div style="clear:both;"></div>
 
                                 <div class="form-group">
                                     <label for="message-text" class="control-label">备注:</label>
@@ -195,7 +195,7 @@
                 {#  </ul>#}
                 {#</nav>#}
 
-                <div style="height: 79px; float: right; border:1px">
+                <div style="float: right; margin-top:0px">
 
                     <ul class="pagination">
                         {{ page_str }}
@@ -204,33 +204,34 @@
                 </div>
 
 
+                <div style="float: right; margin-right: 15px; margin-top: 28px">
 
-                <div style="float: right; margin-right: 1%;margin-top: 1.85%; border:1px">
+                    <span style="font-size: 8px; color: #5a6268">共有1条， 每页显示：</span>
 
-               <span style="font-size: 8px; color: #5a6268">共有1条， 每页显示：</span>
-
-                   <select>
-                       <option value="20">20</option>
-                       <option value="50">50</option>
-                       <option value="100">100</option>
-                   </select>
+                    <select id="page_size" onchange="ChangePageSize(this)">
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
                     <span style="font-size: 8px; color: #5a6268">条</span>
 
                 </div>
 
-                </div>
-
-
-                <div style="clear:both;"></div>
-
             </div>
+
+
+            <div style="clear:both;"></div>
+
         </div>
     </div>
+</div>
 </div>
 
 
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/jquery/jquery.cookie.js"></script>
+<script src="/static/js/del_session.js"></script>
 
 <script>
     function showMsg() {
@@ -308,31 +309,29 @@
     });
 </script>
 
-
-{# 退出登录 #}
 <script>
-    $("#del_session").click(function () {
-        $.ajax({
-            url: "/cmdb/admin",
-            type: "POST",
-            data: {
-                "_type": "del_session"
-            },
-            success: function (data) {
-                {#alert(data);#}
-                var obj = JSON.parse(data);
+    function ChangePageSize(ths) {
+        var v = $(ths).val();
 
-                if (obj.type === "del_session") {
-                    if (obj.status) {
-                        location.reload();
-                    } else {
-                        alert(obj.error);
-                    }
-                }
-            }
-        })
+        $.cookie('per_page_count', v);
+        location.reload();
+    }
+</script>
+
+<script>
+    $(function () {
+        var v = $.cookie('per_page_count');
+
+        if (v) {
+            $("#page_size").val(v);
+        }
+        else {
+            $.cookie('per_page_count', 20);
+            $("#page_size").val(20);
+        }
     })
 </script>
+
 
 </body>
 </html>
