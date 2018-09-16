@@ -1,7 +1,7 @@
 from django.utils.safestring import mark_safe
 
 class Paging:
-    def __init__(self, current_page, all_count, page_count=5, pager_num=5):
+    def __init__(self, current_page, all_count, page_count=20, pager_num=5):
         """
         :current_page 当前点击的页号:
         :all_count 数据总条数:
