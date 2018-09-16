@@ -136,8 +136,9 @@ class Hosts(View):
 
         # 实例化对象
 
+        all_count = len(models.Hosts.objects.all())
 
-        page = pagination.Paging(int(request.GET.get('page_number', 1)), len(models.Hosts.objects.all()), page_count = int(request.COOKIES.get('per_page_count', 20)))
+        page = pagination.Paging(int(request.GET.get('page_number', 1)), all_count, page_count = int(request.COOKIES.get('per_page_count', 20)))
 
         # 获取主机信息
         hosts_info = models.Hosts.objects.all()[page.start:page.end].values("id", "hostname", "ip", "port", "business__name")
@@ -146,7 +147,7 @@ class Hosts(View):
         # 生成前端代码
         page_str = page.page_str("/cmdb/hosts")
 
-        response = render(request, 'hosts.html', {'hosts': hosts_info, "businesses": businesses, 'page_str': page_str})
+        response = render(request, 'hosts.html', {'hosts': hosts_info, "businesses": businesses, 'page_str': page_str, 'all_count': all_count})
         response['X-Application-Name'] = "EOMS"  # 自定义响应头
         return response
 
