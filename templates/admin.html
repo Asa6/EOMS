@@ -62,32 +62,7 @@
 
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-
-
-<script>
-    $("#del_session").click(function () {
-        $.ajax({
-            url: "/cmdb/admin",
-            type: "POST",
-            data: {
-                "_type": "del_session"
-            },
-            success: function (data) {
-                {#alert(data);#}
-                var obj = JSON.parse(data);
-
-                if (obj.type === "del_session") {
-                    if (obj.status) {
-                        location.reload();
-                    } else {
-                        alert(obj.error);
-                    }
-                }
-            }
-        })
-    })
-</script>
-
+<script src="/static/js/del_session.js"></script>
 
 </body>
 </html>

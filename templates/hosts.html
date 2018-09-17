@@ -24,69 +24,62 @@
     <div class="row">
         {% include 'left.html' with activecss2='active' %}
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {#        <div style="padding-left: 0px" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">#}
+        <div style="margin-left: 12%; width: 88%" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <div style="float: right; margin-top: 20px;">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                        data-whatever="@mdo">
-                    <span class="glyphicon glyphicon-plus"></span> 创建实例
-                </button>
-            </div>
+            <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
+                {#                     <h2 class="sub-header">实例列表</h2>#}
+                <p style="font-size: 15px;">实例列表</p>
+            </blockquote>
 
-            <h2 class="sub-header">实例列表</h2>
-            {#            <div style="clear:both;"></div>#}
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                <div style="width: 550px;" class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="exampleModalLabel">主机信息</h4>
+            <div style="padding-top: auto">
+
+                <hr style="margin-bottom: 10px">
+                <div style="float: left; width: 40%;">
+                    <form class="bs-example bs-example-form" role="form">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-btn">
+						<button class="btn btn-default" type="button">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form>
-                                <div style="float:left; width: 46%" class="form-group">
-                                    <label for="recipient-name" class="control-label">主机名:</label>
-                                    <input id="hostname" type="text" class="form-control" id="recipient-name">
-                                </div>
+                    </form>
+                </div>
 
-                                <div style="float:right; width: 46%" class="form-group">
-                                    <label for="recipient-name" class="control-label">IP地址:</label>
-                                    <input id="IP" type="text" class="form-control" id="recipient-name">
-                                </div>
+                <div style="float: right;">
 
-                                <div style="float:left; width: 46%" class="form-group">
-                                    <label for="recipient-name" class="control-label">SSH端口:</label>
-                                    <input id="port" type="text" class="form-control" id="recipient-name">
-                                </div>
+                    <button type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span> 批量删除
+                    </button>
+                </div>
+                {##}
+                <div style="float: right; margin-right: 10px;">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"
+                            data-whatever="@mdo">
+                        <span class="glyphicon glyphicon-plus"></span> 创建实例
+                    </button>
+                </div>
 
-                                <div style="float: right; width: 46%;">
-                                    <label for="recipient-name" class="control-label">业务线:</label>
-                                    <select id="business_select" class="form-control">
-                                        {% for business in businesses %}
-                                            <option value="{{ business.id }}">{{ business.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-
-                                {#                                <div style="clear:both;"></div>#}
-
-                                <div class="form-group">
-                                    <label for="message-text" class="control-label">备注:</label>
-                                    <textarea style="height: 110px" class="form-control" id="message-text"></textarea>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button id="host_submit" type="button" class="btn btn-primary">添加</button>
-                        </div>
-                    </div>
+                <div style="float: right; margin-right: 10px;">
+                    <button style="width: 50px" type="button" class="btn btn-default" data-toggle="tooltip"
+                            data-placement="left" title="刷新">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
                 </div>
             </div>
+
+
+            <div style="clear:both; padding-bottom: 10px"></div>
+
+
+
 
 
             <div class="table-responsive">
@@ -94,89 +87,61 @@
                 <table class="table table-bordered table-hover table-condensed">
                     <thead>
                     <tr>
-                        <th width="35px" style="text-align:center;">
+                        <th width="35px" style="text-align:center; vertical-align:middle">
 
                             {#                                <label><input type="checkbox" value=""></label>#}
                             <input type="checkbox" value="">
 
                         </th>
-                        <th>序号</th>
-                        <th>主机名</th>
-                        <th>IP地址</th>
-                        <th>端口</th>
-                        <th>业务线</th>
-                        <th>删除</th>
+                        <th style="text-align:center; vertical-align:middle">序号</th>
+                        <th style="text-align:center; vertical-align:middle">主机名</th>
+                        <th style="text-align:center; vertical-align:middle">IP地址</th>
+                        <th style="text-align:center; vertical-align:middle">端口</th>
+                        <th style="text-align:center; vertical-align:middle">业务线</th>
+                        <th width="120px" style="text-align:center; vertical-align:middle">编辑实例</th>
+                        <th width="120px" style="text-align:center; vertical-align:middle">删除实例</th>
                         {#                        <th>更新</th>#}
                     </tr>
                     </thead>
                     <tbody>
                     {% for host in hosts %}
                         <tr>
-                        <td style="text-align:center;">
+                        <td style="text-align:center; vertical-align:middle">
 
                             <input type="checkbox" value={{ host.id }}>
 
                         </td>
-                        <td>{{ forloop.counter }}</td>
+                        <td style="text-align:center; vertical-align:middle">{{ forloop.counter }}</td>
                         {#                            <td name = "td_id" id={{ host.id }} class="hide">{{ host.id }}</td>#}
-                        <td>{{ host.hostname }}</td>
-                        <td>{{ host.ip }}</td>
-                        <td>{{ host.port }}</td>
-                        <td>{{ host.business__name }}</td>
-                        <td>
-                            <a data-id="{{ host.id }}" data-toggle="modal"
-                               data-target="#del_host_jump"
-                               data-whatever="@mdo" id="del" title="删除主机">
-                                <span style="font-size: 17px" class="glyphicon glyphicon-trash" ;></span>
-                            </a>
+                        <td style="text-align:center; vertical-align:middle">{{ host.hostname }}</td>
+                        <td style="text-align:center; vertical-align:middle">{{ host.ip }}</td>
+                        <td style="text-align:center; vertical-align:middle">{{ host.port }}</td>
+                        <td style="text-align:center; vertical-align:middle">{{ host.business__name }}</td>
 
-                            <div class="modal fade modleDailog" id="del_host_jump" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel">
-                                <div style="width: 500px;" class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close"><span
-                                                    aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="exampleModalLabel">删除主机</h4>
-                                        </div>
+                        <td style="text-align:center; vertical-align:middle">
+                            <button style="font-size: 8px;" data-id="{{ host.id }}" data-toggle="modal"
+                                    data-target="#"
+                                    data-whatever="@mdo" type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-cog"></span> 编辑主机
+                            </button>
 
-                                        <div class="modal-body">
-                                            <form>
-                                                <div style="height: 80px">
-                                                    <div style="float: left; margin-top: 22.5px;">
-                                                        <span class="glyphicon glyphicon-question-sign"
-                                                              style="font-size:35px; color: orange;">
-                                                        </span>
-                                                    </div>
+                        </td>
 
-                                                    <div style="float: right; margin-top: 30px;">
-                                                        <span style="font-size: 17px;">您所选的 1 个主机  将执行删除操作，您是否确认操作？</span>
-                                                    </div>
-                                                </div>
+                        <td style="text-align:center; vertical-align:middle">
 
-                                                {#                                                <div style="clear:both;"></div>#}
-                                            </form>
-                                        </div>
+                            <button style="font-size: 8px;" data-id="{{ host.id }}" data-toggle="modal"
+                                    data-target="#del_host_jump"
+                                    data-whatever="@mdo" id="del" type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash"></span> 删除主机
+                            </button>
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                            </button>
-
-                                            <input type="text" id="del_host_id" class="hide"/>
-
-                                            <button id="deleteOkBtn" type="button" class="btn btn-primary">确定
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
 
                     {% endfor %}
                     </tr>
 
-
+                    {% include 'del/host.html' %}
+                    {% include 'add/host.html' %}
                     </tbody>
                 </table>
 
@@ -195,51 +160,49 @@
                 {#  </ul>#}
                 {#</nav>#}
 
-                <div style="height: 79px; float: right; border:1px">
-
-
-
+                <div style="float: right; margin-top:0px">
 
                     <ul class="pagination">
-                        <li><a href="#">&laquo;</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li class="disabled"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
+                        {{ page_str }}
                     </ul>
 
                 </div>
 
 
+                <div style="float: right; margin-right: 15px; margin-top: 28px">
 
-                <div style="float: right; margin-right: 1%;margin-top: 1.85%; border:1px">
+                    <span style="color: #5a6268">共有{{ all_count }}条， 每页显示：</span>
 
-               <span style="font-size: 8px; color: #5a6268">共有1条， 每页显示：</span>
-
-                   <select>
-                       <option value="20">20</option>
-                       <option value="50">50</option>
-                       <option value="100">100</option>
-                   </select>
-                    <span style="font-size: 8px; color: #5a6268">条</span>
-
-                </div>
+                    <select id="page_size" onchange="ChangePageSize(this)">
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span style="color: #5a6268">条</span>
 
                 </div>
-
-
-                <div style="clear:both;"></div>
 
             </div>
+
+
+            <div style="clear:both;"></div>
+
         </div>
     </div>
+</div>
 </div>
 
 
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/jquery/jquery.cookie.js"></script>
+<script src="/static/js/del_session.js"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 
 <script>
     function showMsg() {
@@ -317,31 +280,29 @@
     });
 </script>
 
-
-{# 退出登录 #}
 <script>
-    $("#del_session").click(function () {
-        $.ajax({
-            url: "/cmdb/admin",
-            type: "POST",
-            data: {
-                "_type": "del_session"
-            },
-            success: function (data) {
-                {#alert(data);#}
-                var obj = JSON.parse(data);
+    function ChangePageSize(ths) {
+        var v = $(ths).val();
 
-                if (obj.type === "del_session") {
-                    if (obj.status) {
-                        location.reload();
-                    } else {
-                        alert(obj.error);
-                    }
-                }
-            }
-        })
+        $.cookie('per_page_count', v);
+        location.reload();
+    }
+</script>
+
+<script>
+    $(function () {
+        var v = $.cookie('per_page_count');
+
+        if (v) {
+            $("#page_size").val(v);
+        }
+        else {
+            $.cookie('per_page_count', 20);
+            $("#page_size").val(20);
+        }
     })
 </script>
+
 
 </body>
 </html>
