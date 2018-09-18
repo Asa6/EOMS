@@ -11,6 +11,7 @@ $("#del_session").click(function () {
             if (obj.type === "del_session") {
                 if (obj.status) {
                     $.removeCookie('per_page_count');
+                    $.removeCookie('sidebar_width');
                     location.reload();
                 } else {
                     alert(obj.error);
