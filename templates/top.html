@@ -1,51 +1,55 @@
 <style>
-        #row-main {
-    overflow-x: hidden; /* necessary to hide collapsed sidebar */
-}
-
-        .collapsed {
-    display: none; /* hide it for small displays */
-}
-
-        @media (min-width: 992px) {
-    .collapsed {
-        display: block;
-        margin-left: -25%; /* same width as sidebar */
+    #row-main {
+        overflow-x: hidden; /* necessary to hide collapsed sidebar */
     }
-}
 
-        #content {
-    -webkit-transition: width 0.3s ease;
-    -moz-transition: width 0.3s ease;
-    -o-transition: width 0.3s ease;
-    transition: width 0.3s ease;
-}
-#sidebar {
-    -webkit-transition: margin 0.3s ease;
-    -moz-transition: margin 0.3s ease;
-    -o-transition: margin 0.3s ease;
-    transition: margin 0.3s ease;
-}
+    .collapsed {
+        display: none; /* hide it for small displays */
+    }
+
+    @media (min-width: 992px) {
+        .collapsed {
+            display: block;
+            margin-left: -25%; /* same width as sidebar */
+        }
+    }
+
+    #content {
+        -webkit-transition: width 0.3s ease;
+        -moz-transition: width 0.3s ease;
+        -o-transition: width 0.3s ease;
+        transition: width 0.3s ease;
+    }
+
+    #sidebar {
+        -webkit-transition: margin 0.3s ease;
+        -moz-transition: margin 0.3s ease;
+        -o-transition: margin 0.3s ease;
+        transition: margin 0.3s ease;
+    }
 </style>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header col-sm-3 col-md-2">
-            <button type="button" class="navbar-toggle collapsed toggle-sidebar" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-{#            <div style="float: left; " class="col-sm-3 col-md-2">#}
-                 <a class="navbar-brand" href="/cmdb/admin">EOMS</a>
-{#                 <button type="button" class="btn btn-default toggle-sidebar">搜索</button>#}
-{#            </div>#}
 
-{#             <div style="float: left; margin-left: 10px;">#}
-{#                     <button type="button" class="btn btn-default toggle-sidebar">搜索</button>#}
-{#                </div>#}
+<nav id="top" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <div style="float:left;">
+                <button style="border: 0; background-color: initial" type="button"
+                        class="navbar-toggle collapsed toggle-sidebar active"
+                        title="折叠">
+
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+
+            <div style="float: left;">
+                <a class="navbar-brand" href="/cmdb/admin">EOMS</a>
+            </div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

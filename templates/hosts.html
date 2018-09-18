@@ -24,12 +24,16 @@
     <div class="row">
         {% include 'left.html' with activecss2='active' %}
 
-{#        <div id="content" style="margin-left: 12%; width: 88%" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">#}
-{#    <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">#}
-    <div id="content" class="col-sm-9 col-md-10 main">
+        <div id="content"
+             class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
+             style="padding-right:30px;
+             padding-left:30px;
+             -webkit-transition: margin 0.3s ease;
+             -moz-transition: margin 0.3s ease;
+             -o-transition: margin 0.3s ease;
+             transition: margin 0.3s ease;">
 
             <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
-                {#                     <h2 class="sub-header">实例列表</h2>#}
                 <p style="font-size: 15px;">实例列表</p>
             </blockquote>
 
@@ -74,11 +78,6 @@
                         <span class="glyphicon glyphicon-refresh"></span>
                     </button>
                 </div>
-{#                <div style="float: right; margin-right: 10px;">#}
-{#                     <button type="button" class="btn btn-default toggle-sidebar">Toggle sidebar</button>#}
-{#                </div>#}
-
-
 
             </div>
 
@@ -86,12 +85,7 @@
             <div style="clear:both; padding-bottom: 10px"></div>
 
 
-
-
-
             <div class="table-responsive">
-                {#                <table class="table table-striped">#}
-{#            <p class="pre-scrollable" style=" height:100px; overflow:auto">#}
                 <table class="table table-bordered table-hover table-condensed">
                     <thead>
                     <tr>
@@ -109,8 +103,8 @@
                         <th width="120px" style="text-align:center; vertical-align:middle">编辑实例</th>
                         <th width="120px" style="text-align:center; vertical-align:middle">删除实例</th>
 
-{#                                                <th style="text-align:center; vertical-align:middle">编辑实例</th>#}
-{#                        <th style="text-align:center; vertical-align:middle">删除实例</th>#}
+                        {#                                                <th style="text-align:center; vertical-align:middle">编辑实例</th>#}
+                        {#                        <th style="text-align:center; vertical-align:middle">删除实例</th>#}
 
 
                     </tr>
@@ -156,21 +150,6 @@
                     {% include 'add/host.html' %}
                     </tbody>
                 </table>
-
-
-                {#            <nav aria-label="...">#}
-                {#  <ul class="pagination">#}
-                {#    <li class="disabled">#}
-                {#      <span>#}
-                {#        <span aria-hidden="true">&laquo;</span>#}
-                {#      </span>#}
-                {#    </li>#}
-                {#    <li class="active">#}
-                {#      <span>1 <span class="sr-only">(current)</span></span>#}
-                {#    </li>#}
-                {#    ...#}
-                {#  </ul>#}
-                {#</nav>#}
 
                 <div style="float: right; margin-top:0px">
 
