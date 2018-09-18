@@ -1,14 +1,82 @@
-{#<div id="sidebar" class="col-sm-3 col-md-2 sidebar">#}
+<style>
+    .collapsed1 {
+        display: none; /* hide it for small displays */
+    }
+
+    @media (min-width: 992px) {
+        .collapsed1 {
+            display: block;
+            margin-left: auto;
+        }
+    }
+</style>
 
 
 <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
 
 
     <ul class="nav nav-sidebar">
-        <li class="{{ activecss1 }}"><a href="/cmdb/admin">总览</a></li>
-        <li class="{{ activecss2 }}"><a href="/cmdb/hosts">实例</a></li>
-        {#            <li><a href="#">Analytics</a></li>#}
-        {#            <li><a href="#">Export</a></li>#}
+
+        <li class="{{ activecss1 }}">
+            <a href="/cmdb/admin">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;总览</span>
+            </a>
+        </li>
+
+
+        <li class="{{ activecss2 }}">
+            <a href="/cmdb/hosts">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;实例</span>
+            </a>
+        </li>
+
+         <li>
+            <a href="#systemSetting" class="nav-header collapsed1" data-toggle="collapse">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;系统管理</span>
+                <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+            </a>
+
+            <ul style="margin-left: 40px" id="systemSetting" class="nav collapse secondmenu" style="height: 0px;">
+                <li >
+                    <a href="#">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;用户管理 </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</span>
+                    </a>
+                </li>
+
+{#                <li>#}
+{#                    <a href="#">#}
+{#                        <span class="glyphicon glyphicon-asterisk"></span>#}
+{#                        <span>&nbsp;&nbsp;&nbsp;&nbsp;角色管理</span>#}
+{#                    </a>#}
+{#                </li>#}
+
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;修改密码</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;日志查看</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
 
 
