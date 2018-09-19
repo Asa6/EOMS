@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body style="overflow: hidden">
 {% include 'top.html' %}
 
 <div class="container-fluid">
@@ -26,19 +26,17 @@
 
         <div id="content"
              class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
-             style="padding-right:30px;
-             padding-left:30px;
-             -webkit-transition: margin 0.3s ease;
-             -moz-transition: margin 0.3s ease;
-             -o-transition: margin 0.3s ease;
-             transition: margin 0.3s ease;">
+             style="position: absolute;
+             right: 0;
+             padding-right: 30px;
+             padding-left:30px; overflow: scroll; height: 900px">
 
             <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
                 <p style="font-size: 15px;">实例列表</p>
             </blockquote>
 
 
-            <div style="padding-top: auto">
+            <div style="padding-top: auto;">
 
                 <hr style="margin-bottom: 10px">
                 <div style="float: left; width: 40%;">
