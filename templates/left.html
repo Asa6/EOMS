@@ -19,7 +19,7 @@
 
         <li class="{{ activecss1 }}">
             <a href="/cmdb/admin">
-                <span class="glyphicon glyphicon-cog"></span>
+                <span class="glyphicon glyphicon-stats"></span>
                 <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;总览</span>
             </a>
         </li>
@@ -27,20 +27,21 @@
 
         <li class="{{ activecss2 }}">
             <a href="/cmdb/hosts">
-                <span class="glyphicon glyphicon-cog"></span>
+                <span class="glyphicon glyphicon-tasks"></span>
                 <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;实例</span>
             </a>
         </li>
 
-         <li>
-            <a href="#systemSetting" class="nav-header collapsed1" data-toggle="collapse">
+        <li>
+            <a id="setup-menu" href="#systemSetting" class="nav-header collapsed1" data-toggle="collapse">
                 <span class="glyphicon glyphicon-cog"></span>
                 <span style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;系统管理</span>
-                <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                {#                <span class="pull-right glyphicon glyphicon-chevron-down"></span>#}
+                <span id="setup-menu-icon" class="pull-right glyphicon glyphicon-chevron-left"></span>
             </a>
 
-            <ul style="margin-left: 40px" id="systemSetting" class="nav collapse secondmenu" style="height: 0px;">
-                <li >
+            <ul style="margin-left: 40px" id="systemSetting" class="nav collapse" style="height: 0px;">
+                <li>
                     <a href="#">
                         <span class="glyphicon glyphicon-user"></span>
                         <span>&nbsp;&nbsp;&nbsp;&nbsp;用户管理 </span>
@@ -54,12 +55,12 @@
                     </a>
                 </li>
 
-{#                <li>#}
-{#                    <a href="#">#}
-{#                        <span class="glyphicon glyphicon-asterisk"></span>#}
-{#                        <span>&nbsp;&nbsp;&nbsp;&nbsp;角色管理</span>#}
-{#                    </a>#}
-{#                </li>#}
+                {#                <li>#}
+                {#                    <a href="#">#}
+                {#                        <span class="glyphicon glyphicon-asterisk"></span>#}
+                {#                        <span>&nbsp;&nbsp;&nbsp;&nbsp;角色管理</span>#}
+                {#                    </a>#}
+                {#                </li>#}
 
                 <li>
                     <a href="#">
@@ -93,4 +94,3 @@
     {#                            <li><a href="">Another nav item</a></li>#}
     {#            </ul>#}
 </div>
-

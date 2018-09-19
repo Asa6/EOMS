@@ -22,10 +22,21 @@
 <div class="container-fluid">
     <div class="row">
         {% include 'left.html' with activecss1='active' %}
-{#        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">#}
+        <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
+             style="padding-right:30px; padding-left: 30px;
+             padding-left:30px;
+             -webkit-transition: margin 0.3s ease;
+             -moz-transition: margin 0.3s ease;
+             -o-transition: margin 0.3s ease;
+             transition: margin 0.3s ease;">
 
-             <div id="content" class="col-sm-9 col-md-10 main">
+            <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
+                <p style="font-size: 15px;">实例概况</p>
+            </blockquote>
 
+            <div style="padding-top: auto">
+                <hr style="margin-bottom: 10px">
+            </div>
 
 
         </div>
@@ -33,11 +44,11 @@
 </div>
 
 
-
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/del_session.js"></script>
-<script src="/static/js/sidebar_folding.js"></script>
+<script src="/static/js/utils/del_session.js"></script>
+<script src="/static/js/utils/sidebar_folding.js"></script>
+<script src="/static/js/utils/menu-icon.js"></script>
 
 </body>
 </html>
