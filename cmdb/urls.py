@@ -22,6 +22,8 @@ from cmdb.views import Admin
 from cmdb.views import Register
 from cmdb.views import Hosts
 from cmdb.views import Page_not_found
+from cmdb.views import UserManager
+from cmdb.views import Test
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -29,6 +31,9 @@ urlpatterns = [
     path('admin', Admin.as_view()),
     path('register', Register.as_view()),
     path('hosts', Hosts.as_view()),
+    path('user_manager', UserManager.as_view()),
+    path('test', Test.as_view()),
+
 ]
 
 handler404 = Page_not_found.as_view()

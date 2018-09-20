@@ -196,6 +196,25 @@ class Hosts(View):
         return response
 
 
+@method_decorator(auth, name="dispatch")
+class UserManager(View):
+    def __int__(self):
+        self.ret = {"status": True, "error": None, "data": None, "type": None}
+
+    def get(self, request):
+        return render(request, 'UserManager.html')
+
+    def post(self, request):
+        return render(request, 'UserManager.html')
+
+
 class Page_not_found(View):
     def get(self, request):
         return render(request, '404.html')
+
+class Test(View):
+    def get(self, request):
+        return render(request, 'test.html')
+
+    def post(self, request):
+        return render(request, 'test.html')

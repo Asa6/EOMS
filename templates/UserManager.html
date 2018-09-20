@@ -9,32 +9,29 @@
 
     <link rel="icon" href="/static/fonts/favicon.ico">
 
-    <style>
-        .hide {
-            display: none;
-        }
-    </style>
 </head>
+<body>
 
-<body style="overflow: hidden">
+
 {% include 'top.html' %}
 
 <div class="container-fluid">
     <div class="row">
-        {% include 'left.html' with activecss1='active' %}
-        <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
+        {% include 'left.html' with activecss3='active' %}
+{#        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">#}
+
+             <div id="content" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
              style="padding-right:30px; padding-left: 30px;
              padding-left:30px;overflow-y: auto; bottom: 0;top: 50px; position: absolute;
              right: 0;">
 
-            <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
-                <p style="font-size: 15px;">实例概况</p>
+                 <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
+                <p style="font-size: 15px;">用户信息</p>
             </blockquote>
 
             <div style="padding-top: auto">
                 <hr style="margin-bottom: 10px">
             </div>
-
 
         </div>
     </div>
@@ -43,10 +40,9 @@
 
 <script src="/static/jquery/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/jquery/jquery.cookie.js"></script>
 <script src="/static/js/utils/del_session.js"></script>
 <script src="/static/js/utils/sidebar_folding.js"></script>
+<script src="/static/jquery/jquery.cookie.js"></script>
 <script src="/static/js/utils/menu-icon.js"></script>
-
 </body>
 </html>
