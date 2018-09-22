@@ -103,9 +103,18 @@ class Register(View):
 class Admin(View):
     def __init__(self):
         self.ret = {"status": True, "error": None, "data": None, "type": None}
+        self.BusinessLineRatio = {}
 
     def get(self, request):
-        return render(request, 'admin.html')
+        result = models.Business.objects.all().values("id", "name")
+
+        for Each in result:
+           result = models.Hosts.objects.filter(business_id=Each["id"])
+           self.BusinessLineRatio[Each['name']] = len(result)
+
+        self.BusinessLineRatio = json.dumps(self.BusinessLineRatio, ensure_ascii=False)
+
+        return render(request, 'admin.html', {'BusinessLineRatio': self.BusinessLineRatio})
 
     def post(self, request):
         _type = request.POST.get("_type")
