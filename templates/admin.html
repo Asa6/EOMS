@@ -6,8 +6,8 @@
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/static/css/dashboard.css" rel="stylesheet">
-
     <link rel="icon" href="/static/fonts/favicon.ico">
+    <script src="/static/js/ECharts/echarts.min.js"></script>
 
     <style>
         .hide {
@@ -36,81 +36,64 @@
             </div>
 
 
+            <div id="main" style="width: 600px;height:400px; margin-top: 20px"></div>
 
 
-
-
-
-
-
-
-{#            <div class="panel-group" id="accordion">#}
-{##}
-{#    <div class="panel panel-success">#}
-{#        <div class="panel-heading">#}
-{#            <h4 class="panel-title">#}
-{#                <a data-toggle="collapse" data-parent="#accordion"#}
-{#                href="#collapseTwo" class="collapsed1">#}
-{#                点击我进行展开，再次点击我进行折叠。第 2 部分--show 方法#}
-{#                </a>#}
-{#            </h4>#}
-{#        </div>#}
-{#        <div id="collapseTwo" class="panel-collapse collapse">#}
-{#            <div class="panel-body">#}
-{#                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred#}
-{#                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice#}
-{#                lomo.#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="panel panel-info">#}
-{#        <div class="panel-heading">#}
-{#            <h4 class="panel-title">#}
-{#                <a data-toggle="collapse" data-parent="#accordion"#}
-{#                href="#collapseThree" class="collapsed1">#}
-{#                点击我进行展开，再次点击我进行折叠。第 3 部分--toggle 方法#}
-{#                    <span id="setup-menu-icon1" class="pull-right glyphicon glyphicon-chevron-left"></span>#}
-{#                </a>#}
-{#            </h4>#}
-{#        </div>#}
-{#        <div id="collapseThree" class="panel-collapse collapse">#}
-{#            <div class="panel-body">#}
-{#                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred#}
-{#                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice#}
-{#                lomo.#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="panel panel-warning">#}
-{#        <div class="panel-heading">#}
-{#            <h4 class="panel-title">#}
-{#                <a data-toggle="collapse" data-parent="#accordion"#}
-{#                href="#collapseFour" class="collapsed1">#}
-{#                点击我进行展开，再次点击我进行折叠。第 4 部分--options 方法#}
-{#                </a>#}
-{#            </h4>#}
-{#        </div>#}
-{#        <div id="collapseFour" class="panel-collapse collapse">#}
-{#            <div class="panel-body">#}
-{#                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred#}
-{#                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice#}
-{#                lomo.#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-
-
-
-
-
-
-
-
-
-
-
-
+            {#            <div class="panel-group" id="accordion">#}
+            {##}
+            {#    <div class="panel panel-success">#}
+            {#        <div class="panel-heading">#}
+            {#            <h4 class="panel-title">#}
+            {#                <a data-toggle="collapse" data-parent="#accordion"#}
+            {#                href="#collapseTwo" class="collapsed1">#}
+            {#                点击我进行展开，再次点击我进行折叠。第 2 部分--show 方法#}
+            {#                </a>#}
+            {#            </h4>#}
+            {#        </div>#}
+            {#        <div id="collapseTwo" class="panel-collapse collapse">#}
+            {#            <div class="panel-body">#}
+            {#                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred#}
+            {#                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice#}
+            {#                lomo.#}
+            {#            </div>#}
+            {#        </div>#}
+            {#    </div>#}
+            {#    <div class="panel panel-info">#}
+            {#        <div class="panel-heading">#}
+            {#            <h4 class="panel-title">#}
+            {#                <a data-toggle="collapse" data-parent="#accordion"#}
+            {#                href="#collapseThree" class="collapsed1">#}
+            {#                点击我进行展开，再次点击我进行折叠。第 3 部分--toggle 方法#}
+            {#                    <span id="setup-menu-icon1" class="pull-right glyphicon glyphicon-chevron-left"></span>#}
+            {#                </a>#}
+            {#            </h4>#}
+            {#        </div>#}
+            {#        <div id="collapseThree" class="panel-collapse collapse">#}
+            {#            <div class="panel-body">#}
+            {#                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred#}
+            {#                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice#}
+            {#                lomo.#}
+            {#            </div>#}
+            {#        </div>#}
+            {#    </div>#}
+            {#    <div class="panel panel-warning">#}
+            {#        <div class="panel-heading">#}
+            {#            <h4 class="panel-title">#}
+            {#                <a data-toggle="collapse" data-parent="#accordion"#}
+            {#                href="#collapseFour" class="collapsed1">#}
+            {#                点击我进行展开，再次点击我进行折叠。第 4 部分--options 方法#}
+            {#                </a>#}
+            {#            </h4>#}
+            {#        </div>#}
+            {#        <div id="collapseFour" class="panel-collapse collapse">#}
+            {#            <div class="panel-body">#}
+            {#                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred#}
+            {#                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice#}
+            {#                lomo.#}
+            {#            </div>#}
+            {#        </div>#}
+            {#    </div>#}
+            {#</div>#}
 
 
         </div>
@@ -118,9 +101,9 @@
 </div>
 
 
-<script src="/static/jquery/jquery.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/jquery/jquery.cookie.js"></script>
+<script src="/static/jquery/Jquery/jquery.min.js"></script>
+<script src="/static/js/BootStrap/bootstrap.min.js"></script>
+<script src="/static/jquery/Jquery/jquery.cookie.js"></script>
 <script src="/static/js/utils/del_session.js"></script>
 <script src="/static/js/utils/sidebar_folding.js"></script>
 <script src="/static/js/utils/left_menu_collapse.js"></script>
@@ -128,7 +111,7 @@
 {#<script>#}
 {#$(document).ready(function () {#}
 {#    $('#collapseThree').on('show.bs.collapse', function () {#}
-        {#console.log("打开");#}
+{#console.log("打开");#}
 {#        $("#setup-menu-icon1").removeClass("glyphicon-chevron-left");#}
 {#        $("#setup-menu-icon1").addClass("glyphicon-chevron-down");#}
 {#\})#}
@@ -139,7 +122,7 @@
 {#<script>#}
 {#    $(document).ready(function () {#}
 {#     $('#collapseThree').on('hide.bs.collapse', function () {#}
-         {#console.log("隐藏");#}
+{#console.log("隐藏");#}
 {#          $("#setup-menu-icon1").removeClass("glyphicon-chevron-down");#}
 {#          $("#setup-menu-icon1").addClass("glyphicon-chevron-left");#}
 {#\})#}
@@ -148,7 +131,7 @@
 
 {#<script>#}
 {#        $('#collapse1').on('show.bs.collapse', function () {#}
-        {#console.log("打开")#}
+{#console.log("打开")#}
 {#        $("#setup-menu-icon").removeClass("glyphicon-chevron-left");#}
 {#        $("#setup-menu-icon").addClass("glyphicon-chevron-down");#}
 {#    });#}
@@ -157,12 +140,61 @@
 {##}
 {##}
 {#    $('#collapse1').on('hide.bs.collapse', function () {#}
-        {#console.log("隐藏")#}
+{#console.log("隐藏")#}
 {#        $("#setup-menu-icon").removeClass("glyphicon-chevron-down");#}
 {#        $("#setup-menu-icon").addClass("glyphicon-chevron-left");#}
 {#    });#}
 {#</script>#}
 
 
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var key_list = [];
+    var series_data = [];
+
+    for (var key in {{ BusinessLineRatio |safe }}) {
+        series_data.push({name: key, value: {{ BusinessLineRatio |safe }}[key]});
+        key_list.push(key);
+    }
+
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            text: '业务线主机数量占比',
+            subtext: '实例类型：阿里云',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}台 ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: key_list
+        },
+        series: [
+            {
+                name: '主机数量',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: series_data,
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
 </body>
 </html>
