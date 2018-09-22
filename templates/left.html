@@ -9,10 +9,12 @@
             margin-left: auto;
         }
     }
+
+
 </style>
 
 
-<div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+<div id="sidebar" class="col-sm-3 col-md-2 sidebar panel">
 
 
     <ul class="nav nav-sidebar">
@@ -32,51 +34,29 @@
             </a>
         </li>
 
-        <li id="setup-menu" class="collapsed1" data-toggle="collapse" data-target="#systemSetting">
-            <a>
-{#            <a href="#">#}
-                <span class="glyphicon glyphicon-cog"></span>
-                <span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;系统管理</span>
-                <span id="setup-menu-icon" class="pull-right glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </li>
 
-         <div id="systemSetting" class="nav collapse">
-                <li class="active">
-                    <a href="/cmdb/user_manager">
-                        <span style="margin-left: 30px" class="glyphicon glyphicon-user"></span>
-                        <span >&nbsp;&nbsp;&nbsp;&nbsp;用户管理 </span>
-                    </a>
-                </li>
+
+
+
+
+
+
 
                 <li>
-                    <a href="#">
-                        <span style="margin-left: 30px" class="glyphicon glyphicon-th-list"></span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</span>
-                    </a>
+                <a data-toggle="collapse"
+                href="#collapse1" class="collapsed1">
+                系统管理
+                    <span id="setup-menu-icon" class="pull-right glyphicon glyphicon-chevron-left"></span>
+                </a>
                 </li>
 
-                {#                <li>#}
-                {#                    <a href="#">#}
-                {#                        <span class="glyphicon glyphicon-asterisk"></span>#}
-                {#                        <span>&nbsp;&nbsp;&nbsp;&nbsp;角色管理</span>#}
-                {#                    </a>#}
-                {#                </li>#}
 
-                <li>
-                    <a href="#">
-                        <span style="margin-left: 30px" class="glyphicon glyphicon-edit"></span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;修改密码</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span style="margin-left: 30px" class="glyphicon glyphicon-eye-open"></span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;日志查看</span>
-                    </a>
-                </li>
+                <div id="collapse1" class="panel-collapse collapse">
+             <div class="panel-body">
+                用户管理
+             </div>
             </div>
+
 
     </ul>
 
@@ -94,3 +74,4 @@
     {#                            <li><a href="">Another nav item</a></li>#}
     {#            </ul>#}
 </div>
+
