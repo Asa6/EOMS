@@ -58,7 +58,7 @@
 
                 <div style="float: right;">
 
-                    <button type="button" class="btn btn-danger">
+                    <button id="batch_delete" type="button" class="btn btn-danger disabled">
                         <span class="glyphicon glyphicon-trash"></span> 批量删除
                     </button>
                 </div>
@@ -88,7 +88,7 @@
                     <thead>
                     <tr>
                         <th width="35px" style="text-align:center; vertical-align:middle">
-                            <input type="checkbox" value="">
+                            <input id="selectAll" type="checkbox">
                         </th>
                         <th style="text-align:center; vertical-align:middle">序号</th>
                         <th style="text-align:center; vertical-align:middle">主机名</th>
@@ -283,6 +283,63 @@
             $.cookie('per_page_count', 20);
             $("#page_size").val(20);
         }
+    })
+</script>
+
+<script>
+    $("#selectAll").click(function(){
+        console.log($("#selectAll").prop("checked"));
+    if ($("#selectAll").prop("checked")) {
+        $("input[type='checkbox']").prop("checked",true);//全选
+
+        // 激活批量删除按钮
+        $("#batch_delete").removeClass("disabled");
+        $("#batch_delete").addClass("active");
+
+        // 获取所有被选中checkbox的值
+        var id_array=new Array();
+        $("input[type='checkbox']:checked").each(function (i) {
+            id_array.push($(this).val());
+        });
+        var vals = id_array.join(",");
+        console.log(vals)
+    } else {
+        $("input[type='checkbox']").prop("checked",false);  // 取消全选
+
+        // 禁用批量删除按钮
+        $("#batch_delete").removeClass("active");
+        $("#batch_delete").addClass("disabled");
+    }
+});
+
+
+</script>
+
+<script>
+    $("input:checkbox").not("#selectAll").click(function () {
+         var vals = [];
+         var val_len = 0;
+
+
+          if ($(this).not("#selectAll").prop("checked")) {
+              $(this).not("#selectAll").prop("checked",true);//全选
+              {#console.log("选中")#}
+          }
+          else {
+              $(this).not("#selectAll").prop("checked",false);  // 取消全选
+          }
+
+
+         var id_array=[];
+
+
+        $("input[type='checkbox']:checked").not("#selectAll").each(function (i) {
+            id_array.push($(this).val());
+        });
+        vals = id_array;
+        console.log(vals);
+        console.log(vals.length)
+
     })
 </script>
 
