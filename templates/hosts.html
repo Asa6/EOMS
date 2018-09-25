@@ -287,58 +287,70 @@
 </script>
 
 <script>
-    $("#selectAll").click(function(){
+    $("#selectAll").click(function () {
         console.log($("#selectAll").prop("checked"));
-    if ($("#selectAll").prop("checked")) {
-        $("input[type='checkbox']").prop("checked",true);//全选
+        if ($("#selectAll").prop("checked")) {
+            $("input[type='checkbox']").prop("checked", true);//全选
 
-        // 激活批量删除按钮
-        $("#batch_delete").removeClass("disabled");
-        $("#batch_delete").addClass("active");
+            // 激活批量删除按钮
+            $("#batch_delete").removeClass("disabled");
+            $("#batch_delete").addClass("active");
 
-        // 获取所有被选中checkbox的值
-        var id_array=new Array();
-        $("input[type='checkbox']:checked").each(function (i) {
-            id_array.push($(this).val());
-        });
-        var vals = id_array.join(",");
-        console.log(vals)
-    } else {
-        $("input[type='checkbox']").prop("checked",false);  // 取消全选
+            // 获取所有被选中checkbox的值
+            var id_array = new Array();
+            $("input[type='checkbox']:checked").each(function (i) {
+                id_array.push($(this).val());
+            });
+            var vals = id_array.join(",");
+            console.log(vals)
+        } else {
+            $("input[type='checkbox']").prop("checked", false);  // 取消全选
 
-        // 禁用批量删除按钮
-        $("#batch_delete").removeClass("active");
-        $("#batch_delete").addClass("disabled");
-    }
-});
+            // 禁用批量删除按钮
+            $("#batch_delete").removeClass("active");
+            $("#batch_delete").addClass("disabled");
+        }
+    });
 
 
 </script>
 
 <script>
     $("input:checkbox").not("#selectAll").click(function () {
-         var vals = [];
-         var val_len = 0;
+        var vals = [];
+        var val_len = 0;
 
 
-          if ($(this).not("#selectAll").prop("checked")) {
-              $(this).not("#selectAll").prop("checked",true);//全选
-              {#console.log("选中")#}
-          }
-          else {
-              $(this).not("#selectAll").prop("checked",false);  // 取消全选
-          }
+        if ($(this).not("#selectAll").prop("checked")) {
+            $(this).not("#selectAll").prop("checked", true);//全选
+            {#console.log("选中")#}
+        }
+        else {
+            $(this).not("#selectAll").prop("checked", false);  // 取消全选
+        }
 
 
-         var id_array=[];
+        var id_array = [];
 
 
         $("input[type='checkbox']:checked").not("#selectAll").each(function (i) {
             id_array.push($(this).val());
         });
-        vals = id_array;
-        console.log(vals);
-        console.log(vals.length)
+
+        {#vals = id_array;#}
+
+        if (id_array.length === 0) {
+            $("#batch_delete").removeClass("active");
+            $("#batch_delete").addClass("disabled");
+        }
+        else {
+            $("#batch_delete").removeClass("disabled");
+            $("#batch_delete").addClass("active");
+        }
+
+
+        {#console.log(vals);#}
+        {#console.log(vals.length)#}
 
     })
 </script>
