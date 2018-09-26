@@ -8,7 +8,7 @@
 
 开发环境
 
-
+        python 3.6
         django 2.0.5 
         PyMySQL 0.9.2
         django-redis 4.9.0
