@@ -1,1 +1,6 @@
-*.js linguist-language=Python
+static/js/ECharts/* linguist-vendored
+static/js/jQuery/* linguist-vendored
+static/js/BootStrap/* linguist-vendored
+static/js/npm.js linguist-vendored
+static/js/BootStrap/* linguist-vendored
+static/css/bootstrap* linguist-vendored
