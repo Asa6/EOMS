@@ -1,1 +1,2 @@
-*.js linguist-language=Python
+echarts.min.js linguist-vendored=false
+echarts.js linguist-vendored=false
