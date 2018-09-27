@@ -27,9 +27,7 @@
         <div id="content"
              class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
              style="position: absolute;
-             right: 0;
-             padding-right: 30px;
-             padding-left:30px; overflow-y: auto; bottom: 0;top: 50px">
+             right: 0; overflow-y: auto; bottom: 0;top: 50px">
 
             <blockquote style="border-left-color: #428bca; padding: 5px 20px;">
                 <p style="font-size: 15px;">实例列表</p>
@@ -95,6 +93,7 @@
                         <th style="text-align:center; vertical-align:middle">IP地址</th>
                         <th style="text-align:center; vertical-align:middle">SSH端口</th>
                         <th style="text-align:center; vertical-align:middle">业务线</th>
+                          <th width="110px" style="text-align:center; vertical-align:middle">状态</th>
                         <th width="120px" style="text-align:center; vertical-align:middle">编辑实例</th>
                         <th width="120px" style="text-align:center; vertical-align:middle">删除实例</th>
                     </tr>
@@ -113,6 +112,16 @@
                         <td style="text-align:center; vertical-align:middle">{{ host.ip }}</td>
                         <td style="text-align:center; vertical-align:middle">{{ host.port }}</td>
                         <td style="text-align:center; vertical-align:middle">{{ host.business__name }}</td>
+                        <td style="text-align:center; vertical-align:middle">
+                            <div>
+                                <div style="float: left; ;margin-left:5px;margin-top:1px;padding-left: 10px">
+                                    <i style="width:15px;height:15px;border-radius:50%;background-color:limegreen;display: block"></i>
+                                </div>
+                                <div style="float: left;">
+                                    <span>&nbsp;&nbsp;运行中</span>
+                                </div>
+                            </div>
+                        </td>
 
                         <td style="text-align:center; vertical-align:middle">
                             <button style="font-size: 8px;" data-id="{{ host.id }}" data-toggle="modal"
