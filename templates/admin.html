@@ -250,7 +250,7 @@
 
             <blockquote
                     style="float:left;border-left-color: #428bca; padding: 2px 10px;margin-left: 30px;margin-top: 10px">
-                {#                <p style="font-size: 15px;">近期消息&nbsp;&nbsp;<span style="margin-top: -2px" class="badge">42</span></p>#}
+{#                                <p style="font-size: 15px;">近期消息&nbsp;&nbsp;<span style="margin-top: -2px" class="badge">42</span></p>#}
                 <p style="font-size: 15px;">近期消息</p>
             </blockquote>
 
@@ -258,9 +258,11 @@
             <div style="clear:both;"></div>
 
 
-             <div id="main1" style="width: 70%;height: 400px;margin-top: 30px;"></div>
+            <div id="main1" style="width: 70%;height: 450px;margin-top: 30px;"></div>
 
-            <div id="main" style="width: 70%;height: 400px;margin-top: 50px;margin-right: 25px"></div>
+
+
+            <div id="main" style="width: 70%;height: 450px;margin-top: 50px;margin-right: 25px;"></div>
 
 
             {##}
@@ -481,6 +483,84 @@
     myChart.resize();
     myChart1.resize();
 };
+</script>
+
+
+{#onresize功能增强#}
+<script>
+    		(function($, h, c) {
+			var a = $([]), e = $.resize = $.extend($.resize, {}), i, k = "setTimeout", j = "resize", d = j
+					+ "-special-event", b = "delay", f = "throttleWindow";
+			e[b] = 300;
+			e[f] = true;
+			$.event.special[j] = {
+				setup : function() {
+					if (!e[f] && this[k]) {
+						return false
+					}
+					var l = $(this);
+					a = a.add(l);
+					$.data(this, d, {
+						w : l.width(),
+						h : l.height()
+					});
+					if (a.length === 1) {
+						g()
+					}
+				},
+				teardown : function() {
+					if (!e[f] && this[k]) {
+						return false
+					}
+					var l = $(this);
+					a = a.not(l);
+					l.removeData(d);
+					if (!a.length) {
+						clearTimeout(i)
+					}
+				},
+				add : function(l) {
+					if (!e[f] && this[k]) {
+						return false
+					}
+					var n;
+					function m(s, o, p) {
+						var q = $(this), r = $.data(this, d);
+						r.w = o !== c ? o : q.width();
+						r.h = p !== c ? p : q.height();
+						n.apply(this, arguments)
+					}
+					if ($.isFunction(l)) {
+						n = l;
+						return m
+					} else {
+						n = l.handler;
+						l.handler = m
+					}
+				}
+			};
+			function g() {
+				i = h[k](function() {
+					a.each(function() {
+						var n = $(this), m = n.width(), l = n.height(), o = $
+								.data(this, d);
+						if (m !== o.w || l !== o.h) {
+							n.trigger(j, [ o.w = m, o.h = l ])
+						}
+					});
+					g()
+				}, e[b])
+			}
+		})(jQuery, this);
+
+</script>
+
+<script>
+    $("#content").resize(function () {
+        {#console.log("改变")#}
+        myChart.resize();
+        myChart1.resize();
+    })
 </script>
 
 
