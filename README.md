@@ -6,13 +6,17 @@
 
 <br />
 
-运行环境： 
+开发环境
 
-
+        python 3.6
         django 2.0.5 
         PyMySQL 0.9.2
         django-redis 4.9.0
 
+
+运行环境
+             
+        nginx + gunicorn + django + mysql + redis
 
 
 
@@ -20,6 +24,7 @@
 
         python manage.py makemigrations
         python manage.py migrate
+
 
 
 额外操作
