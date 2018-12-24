@@ -11,6 +11,7 @@ from django.views.generic import View
 from utils import pagination
 from cmdb import models  # 数据库
 import json
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 
 
@@ -30,6 +31,8 @@ class Login(View):
 
     # request 包含用户提交的所有信息
     def get(self, request):
+        print(request.session.get('username'), "----------test-----------")
+        print(request.COOKIES)
         if request.session.get('is_login', None):
             return redirect("/cmdb/admin")
 
@@ -216,11 +219,12 @@ class UserManager(View):
     def post(self, request):
         return render(request, 'UserManager.html')
 
-
+@csrf_exempt
 class Page_not_found(View):
     def get(self, request):
         return render(request, '404.html')
 
+@csrf_exempt
 class Test(View):
     def get(self, request):
         return render(request, 'test.html')

@@ -341,6 +341,12 @@
 <script src="/static/js/utils/left_menu_collapse.js"></script>
 <script src="/static/js/ECharts/echarts.min.js"></script>
 
+<script>
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        });
+</script>
+
 {#<script>#}
 {#$(document).ready(function () {#}
 {#    $('#collapseThree').on('show.bs.collapse', function () {#}
