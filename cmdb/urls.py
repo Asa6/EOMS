@@ -33,7 +33,6 @@ urlpatterns = [
     path('hosts', Hosts.as_view()),
     path('user_manager', UserManager.as_view()),
     path('test', Test.as_view()),
-
 ]
 
 handler404 = Page_not_found.as_view()
