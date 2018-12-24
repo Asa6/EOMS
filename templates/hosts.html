@@ -56,9 +56,11 @@
 
                 <div style="float: right;">
 
-                    <button id="batch_delete" type="button" class="btn btn-danger disabled">
+                    <button id="batch_delete" type="button" class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#batch_del_host_jump"
+                    data-whatever="@mdo">
                         <span class="glyphicon glyphicon-trash"></span> 批量删除
                     </button>
+
                 </div>
                 {##}
                 <div style="float: right; margin-right: 10px;">
@@ -149,6 +151,7 @@
                     </tr>
 
                     {% include 'del/host.html' %}
+                    {% include 'del/batch_del.html' %}
                     {% include 'add/host.html' %}
                     </tbody>
                 </table>
@@ -306,13 +309,12 @@
 
 <script>
     $("#selectAll").click(function () {
-        console.log($("#selectAll").prop("checked"));
+        {#console.log($("#selectAll").prop("checked"));#}
         if ($("#selectAll").prop("checked")) {
             $("input[type='checkbox']").prop("checked", true);//全选
 
             // 激活批量删除按钮
-            $("#batch_delete").removeClass("disabled");
-            $("#batch_delete").addClass("active");
+            $("#batch_delete").removeAttr('disabled');
 
             // 获取所有被选中checkbox的值
             var id_array = new Array();
@@ -325,12 +327,9 @@
             $("input[type='checkbox']").prop("checked", false);  // 取消全选
 
             // 禁用批量删除按钮
-            $("#batch_delete").removeClass("active");
-            $("#batch_delete").addClass("disabled");
+             $("#batch_delete").attr('disabled', 'disabled');
         }
     });
-
-
 </script>
 
 <script>
@@ -338,15 +337,13 @@
         var vals = [];
         var val_len = 0;
 
-
         if ($(this).not("#selectAll").prop("checked")) {
             $(this).not("#selectAll").prop("checked", true);//全选
-            {#console.log("选中")#}
+            console.log("选中")
         }
         else {
             $(this).not("#selectAll").prop("checked", false);  // 取消全选
         }
-
 
         var id_array = [];
 
@@ -355,23 +352,22 @@
             id_array.push($(this).val());
         });
 
-        {#vals = id_array;#}
+        vals = id_array;
 
         if (id_array.length === 0) {
-            $("#batch_delete").removeClass("active");
-            $("#batch_delete").addClass("disabled");
+            $("#batch_delete").attr('disabled', 'disabled');
         }
         else {
-            $("#batch_delete").removeClass("disabled");
-            $("#batch_delete").addClass("active");
+           $("#batch_delete").removeAttr('disabled');
         }
 
 
         {#console.log(vals);#}
-        {#console.log(vals.length)#}
-
+        {#console.log(vals.length);#}
+        console.log(id_array)
     })
 </script>
+
 
 </body>
 </html>
