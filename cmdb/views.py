@@ -11,7 +11,7 @@ from django.views.generic import View
 from utils import pagination
 from cmdb import models  # 数据库
 import json
-# from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 
 
