@@ -194,6 +194,12 @@
 <script src="/static/js/utils/left_menu_collapse.js"></script>
 
 <script>
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        });
+</script>
+
+<script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
