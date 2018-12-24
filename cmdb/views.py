@@ -11,7 +11,7 @@ from django.views.generic import View
 from utils import pagination
 from cmdb import models  # 数据库
 import json
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
+# from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 
 
@@ -219,12 +219,11 @@ class UserManager(View):
     def post(self, request):
         return render(request, 'UserManager.html')
 
-@csrf_exempt
 class Page_not_found(View):
     def get(self, request):
         return render(request, '404.html')
 
-@csrf_exempt
+
 class Test(View):
     def get(self, request):
         return render(request, 'test.html')
