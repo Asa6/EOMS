@@ -33,5 +33,9 @@
         python manage.py migrate --fake  # 如果有删除表或更改表名时先执行这一句
 
 其他操作
+
         python manage.py sqlmigrate cmdb 0001   # 查看cmdb app的建表sql
-        python manage.py dumpdata cmdb > cmdb_dump.json   #导出 cmdb app的数据
+        
+        python manage.py dumpdata cmdb > cmdb_dump.json   #导出cmdb app的数据
+        python manage.py migrate --fake  # 导入cmdb app的数据
+
