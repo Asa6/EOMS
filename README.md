@@ -31,5 +31,18 @@
 
         python manage.py makemigrations --empty 应用名
         python manage.py migrate --fake  # 如果有删除表或更改表名时先执行这一句
+        
+        
+导出表数据
+        
+        python manage.py dumpdata cmdb > cmdb_dump.json
+        
+导入表数据   
+        
+        python manage.py loaddata cmdb_dump.json
+        
+查看创建表sql
 
-
+        python manage.py sqlmigrate cmdb 0001
+  
+        
