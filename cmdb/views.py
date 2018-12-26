@@ -12,6 +12,7 @@ from utils import pagination
 from cmdb import models  # 数据库
 import json
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.db.models import Q
 
 
 
@@ -33,6 +34,7 @@ class Login(View):
     def get(self, request):
         print(request.session.get('username'), "----------test-----------")
         print(request.COOKIES)
+
         if request.session.get('is_login', None):
             return redirect("/cmdb/admin")
 
@@ -111,13 +113,19 @@ class Admin(View):
     def get(self, request):
         result = models.Business.objects.all().values("id", "name")
 
+        total_quantity = models.Hosts.objects.filter(~Q(status_id=7))
+        active_number = models.Hosts.objects.filter(status_id=1)
+        stop_number = models.Hosts.objects.filter(status_id=2)
+        released_number = models.Hosts.objects.filter(status_id=7)
+        print(len(active_number), len(stop_number), len(total_quantity))
+
         for Each in result:
            result = models.Hosts.objects.filter(business_id=Each["id"])
            self.BusinessLineRatio[Each['name']] = len(result)
 
         self.BusinessLineRatio = json.dumps(self.BusinessLineRatio, ensure_ascii=False)
 
-        return render(request, 'admin.html', {'BusinessLineRatio': self.BusinessLineRatio})
+        return render(request, 'admin.html', {'BusinessLineRatio': self.BusinessLineRatio, 'ActiveNumber': len(active_number), 'StopNumber': len(stop_number), 'TotalQuantity': len(total_quantity), 'ReleasedNumber': len(released_number)})
 
     def post(self, request):
         _type = request.POST.get("_type")
@@ -148,12 +156,15 @@ class Hosts(View):
 
         # 实例化对象
 
-        all_count = len(models.Hosts.objects.all())
+        all_count = len(models.Hosts.objects.filter(~Q(status_id=7)))
 
         page = pagination.Paging(int(request.GET.get('page_number', 1)), all_count, page_count = int(request.COOKIES.get('per_page_count', 20)))
 
         # 获取主机信息
-        hosts_info = models.Hosts.objects.all()[page.start:page.end].values("id", "hostname", "ip", "port", "business__name")
+        hosts_info = models.Hosts.objects.filter(~Q(status_id=7))[page.start:page.end].values("id", "hostname", "ip", "port", "business__name", "status__color", "status__describe", "status__iconstyle")
+
+        print(len(hosts_info), hosts_info)
+
         businesses = models.Business.objects.all().values("id", "name")
 
         # 生成前端代码

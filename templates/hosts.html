@@ -116,14 +116,21 @@
                         <td style="text-align:center; vertical-align:middle">{{ host.business__name }}</td>
                         <td style="text-align:center; vertical-align:middle">
                             <div>
-                                <div style="float: left; ;margin-left:5px;margin-top:1px;padding-left: 10px">
-                                    <span style="font-size: 17px;color: forestgreen;-webkit-text-stroke-width: 0.5px;" class="glyphicon glyphicon-play-circle"></span>
-{#                                    <i style="width:15px;height:15px;border-radius:50%;background-color:limegreen;display: block"></i>#}
+{#                                <div style="float: left; ;margin-left:5px;margin-top:1px;padding-left: 10px">#}
+{#                                    <span style="font-size: 17px;color: forestgreen;-webkit-text-stroke-width: 0.5px;" class="glyphicon glyphicon-play-circle"></span>#}
+{#                                </div>#}
 
+                                 <div style="float: left; ;margin-left:5px;margin-top:1px;padding-left: 10px">
+                                    <span style="font-size: 17px;color: {{ host.status__color }};-webkit-text-stroke-width: 0.5px;" class="glyphicon {{ host.status__iconstyle }}"></span>
                                 </div>
-                                <div style="float: left;color: forestgreen">
+
+{#                                <div style="float: left;color: forestgreen">#}
 {#                                    <span style="font-size: 17px" class="glyphicon glyphicon-play-circle"></span>#}
-                                    <span>&nbsp;&nbsp;运行中</span>
+{#                                    <span>&nbsp;&nbsp;运行中</span>#}
+{#                                </div>#}
+
+                                <div style="float: left;color: {{ host.status__color }}">
+                                    <span>&nbsp;&nbsp;{{ host.status__describe }}</span>
                                 </div>
                             </div>
                         </td>
